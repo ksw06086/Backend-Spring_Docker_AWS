@@ -18,7 +18,10 @@ public class TestEntity {
         this.age = age;
     }
 
-    public TestEntity() {
+    public TestEntity() {}
 
+    public void changeNameAndAge(String name, Integer age){
+        this.name = name;
+        this.age = age;
     }
 }
