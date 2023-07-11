@@ -5,6 +5,8 @@ import com.swkim.review.repository.TestRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @AllArgsConstructor
 @Service
 public class TestService {
@@ -24,5 +26,13 @@ public class TestService {
     public void delete(Long id){
         TestEntity testEntity = testRepository.findById(id).orElse(null);
         testRepository.delete(testEntity);
+    }
+
+    public List<TestEntity> findAllByNameByJPA(String name) {
+        return testRepository.findAllByName(name);
+    }
+
+    public List<TestEntity> findAllByNameByQuerydsl(String name){
+        return testRepository.findAllByNameByQuerydsl(name);
     }
 }
