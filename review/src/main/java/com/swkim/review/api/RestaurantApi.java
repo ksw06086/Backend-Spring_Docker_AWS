@@ -1,10 +1,16 @@
 package com.swkim.review.api;
 
 import com.swkim.review.api.request.CreateAndEditRestaurantRequest;
+import com.swkim.review.model.RestaurantEntity;
+import com.swkim.review.service.RestaurantService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+@RequiredArgsConstructor
 @RestController
 public class RestaurantApi {
+
+    private final RestaurantService restaurantService;
 
     @GetMapping("/restaurants")
     public String getRestaurants() {
@@ -18,14 +24,10 @@ public class RestaurantApi {
     }
 
     @PostMapping("/restaurant")
-    public String createRestaurant(
+    public RestaurantEntity createRestaurant(
             @RequestBody CreateAndEditRestaurantRequest request
     ) {
-        return "This is createRestaurant, name="
-                + request.getName() + ", address="
-                + request.getAddress() + ", menuName="
-                + request.getMenus().get(0).getName() + ", menuPrice="
-                + request.getMenus().get(0).getPrice();
+        return restaurantService.createRestaurant(request);
     }
 
     @PutMapping("/restaurant/{restaurantId}")
